@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.login-stack {
+  padding-top: 30px;
+}
+
+.signup-stack {
+  padding-top: 30px;
+}
+
+/* .Login-Button{
+  color: grey;
+} */

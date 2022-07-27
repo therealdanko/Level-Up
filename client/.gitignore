@@ -21,3 +21,43 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# {/* <form onSubmit={handeSubmit}>
+#         <input type="file" onChange={(e) => setFile(e.target.files[0])}>
+#           </input>
+#         <input type="submit"></input>
+#       </form> */}
+
+#  const [file, setFile] = useState("")
+
+#  const handeSubmit = (e) =>{
+#    e.preventDefault();
+#    const data = new FormData();
+#   data.append("file", file)
+#    fetch("/tests", {
+#      method: "POST",
+#   })
+#    .then((res) => res.json())
+#   .then(console.log)
+
+# }
+
+# require "cloudinary"
+
+# class TestsController < ApplicationController
+
+#     def create
+#         file = params[:file]
+#         auth = {
+#             cloud_name: ENV['cloud_name'],
+#             api_key: ENV['api_key'],
+#             api_secret: ENV['api_secret'], 
+#             resource_type: 'image'
+#         }
+
+
+#         uploaded = Cloudinary::Uploader.upload(file, auth)
+#         render json: uploaded
+#     end
+# end
+
