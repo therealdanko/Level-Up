@@ -11,9 +11,14 @@ class SkillsController < ApplicationController
         render json: @skill
     end
 
-    # def create
-    #     new_skill = current_user.skills.create!(post_params)
-    #     render json: new_skill, status: :created
+    def create
+        new_skill = current_user.skills.create!(skill_params)
+        render json: new_skill, status: :created
+    end
+
+    # def selected_skill_show
+    #   selected_skill_users = @skill.users
+    #     render json: selected_skill_users
     # end
 
     private 
@@ -28,8 +33,8 @@ class SkillsController < ApplicationController
     # end
     
 
-    # def post_params
-    #     params.permit(:name)
-    # end
+    def skill_params
+        params.permit(:name)
+    end
 
 end

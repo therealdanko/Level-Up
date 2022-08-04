@@ -12,6 +12,8 @@ function HomePage({onLogOut, user}) {
     <>
         <Stack>
           <h1>Welcome to LEVEL UP!</h1>
+          <br></br>
+          <h5>Currently in Development, not all feautures are functional!</h5>
    
   
   

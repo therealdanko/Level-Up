@@ -17,8 +17,14 @@ import SkillsToLevelUpPage from './Pages/SettingsPage/SkillsToLevelUpPage'
 
 function App() {
 
-  const [users, setUsers] = useState([])
+  // const [users, setUsers] = useState([])
   const [user, setUser] = useState(null)
+  const [skills, setSkills] = useState([])
+  const [selectedSkill, setSelectedSkill] = useState({})
+
+  const handleSelectedSkill = (selected) => {
+    setSelectedSkill(() => (selected))
+  }
 
   const theme = createTheme({
     palette: {
@@ -36,20 +42,39 @@ function App() {
   useEffect(() => {
     fetch('/me').then((resp) => {
       if (resp.ok) {
-        resp.json().then((user) => setUser(user))
+        resp.json().then((user) => {
+          setUser(user)
+        })
       }
     })
   }, [])
 
-  useEffect(() => {
-    fetch('/users').then((resp) => {
+  const handleFindUsers = (id) => {
+    fetch(`/skills/${id}`).then((resp) => {
       if (resp.ok) {
-        resp.json().then((users) => setUsers(users))
-        console.log(users)
+        resp.json().then((skill) => {
+          setSelectedSkill(skill)
+          console.log(skill)
+        })
+        
+      }
+    })
+
+  }
+  
+  
+  useEffect(() => {
+    fetch('/skills').then((resp) => {
+      if (resp.ok) {
+        resp.json().then((skillsList) => {
+          setSkills(skillsList)
+})            
+        
       }
     })
   },[])
 
+  // if(!selectedSkill) return null;
   
   if (!user) return (
     <>
@@ -72,33 +97,49 @@ function App() {
         element={<HomePage 
         user={user} 
         onLogOut={setUser}/>}/>
+
         <Route path="/searchPage" 
         element={<SearchPage 
         user={user}
-        users={users} 
+        // users={users}
+        skills={skills}
+        selectedSkill={selectedSkill}
+        handleFindUsers={handleFindUsers}
+        handleSelectedSkill={handleSelectedSkill}
         onLogOut={setUser}/>}/>
+
         <Route path="/messagesPage" 
         element={<MessagesPage 
         user={user} 
         onLogOut={setUser}/>}/>
+
         <Route path="/settingsPage" 
-        element={<SettingsPage 
+        element={<SettingsPage
+        skills={skills} 
         user={user}  
         onLogOut={setUser}/>}/>
+
         <Route path="/userSkillPage" 
         element={<UserSkillPage 
-        user={user}         
+        skills={skills} 
+        user={user}
+        selectedSkill={selectedSkill}
+        setSelectedSkill={setSelectedSkill}
+        handleSelectedSkill={handleSelectedSkill}      
         />}/>
+
         <Route path="/userInfoPage" 
         element={<UserInfoPage 
         user={user} 
         onDelete={setUser}         
         />}/>
+
         <Route path="/skillsToLevelUpPage" 
         element={<SkillsToLevelUpPage 
         user={user} 
         onDelete={setUser}         
         />}/>
+        
       </Routes>
       <BottomNavBar user={user}/>
       </ThemeProvider>

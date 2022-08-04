@@ -39,7 +39,7 @@ def authorize_user
 
 
 def user_skill_params 
-    params.permit(:video, :description, :experience, :credentials)
+    params.permit(:video, :description, :experience, :credentials, :skill_id)
 end
 
 end

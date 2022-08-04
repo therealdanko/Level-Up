@@ -12,7 +12,7 @@ import CardMedia from '@mui/material/CardMedia';
 import UploadImage from '../../Components/SettingsPage/UploadImage'
 import UserSkillsSettings from '../../Components/SettingsPage/UserSkillsSettings'
 import EditUserInfo from '../../Components/SettingsPage/EditUserInfo';
-import EditSkillsSearching from '../../Components/SettingsPage/EditSkillsSearching'
+
 
 
 
@@ -20,8 +20,12 @@ import EditSkillsSearching from '../../Components/SettingsPage/EditSkillsSearchi
 function SettingsPage({ onLogOut, user}) {
 
     const navigate = useNavigate()
-    const [file, setFile] = useState("")
    
+    const [userImage, setUserImage] = useState(user.profile_image)
+   
+    const handleUserImage = (selected) => {
+        setUserImage(() => selected)
+    }
 
     const imageCard = (
         <>
@@ -29,12 +33,12 @@ function SettingsPage({ onLogOut, user}) {
                 <CardMedia
                     component="img"
                     height="300"
-                    image={user.profile_image}
+                    image={userImage}
                     alt="Profile Pic"
                 />
             </CardContent>
             <CardActions style={{ justifyContent: 'center' }}>
-                <UploadImage />
+                <UploadImage user={user} handleUserImage={handleUserImage}/>
             </CardActions>
         </>
     );
@@ -42,29 +46,14 @@ function SettingsPage({ onLogOut, user}) {
 
     const skillsCard = (
         <>
-        {/* <CardContent 
-        sx={{ 
-            margin: "auto", 
-            alignItems: "center", 
-            justifyContent: 'center', 
-            padding: ".2vh",
-            paddingBottom: ".2vh"
-            }}>   */}
-              
+
             <CardActions direction ="column" style={{ justifyContent: 'center' }}>        
               <UserSkillsSettings user={user}/>
         </CardActions>  
-        {/* </CardContent> */}
         </>
     )
 
-    const skillsToLevel = (
-        <>
-        <CardActions style={{ justifyContent: 'center' }}>        
-             <EditSkillsSearching user={user} on/>
-        </CardActions>
-        </>
-    )
+  
 
     const userSettings = (
         <>
@@ -94,11 +83,6 @@ function SettingsPage({ onLogOut, user}) {
             <Stack direction="column">
                 <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
                    <Card variant="outlined">{skillsCard}</Card>
-                </Box>
-            </Stack>
-            <Stack>
-                <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
-                   <Card variant="outlined">{skillsToLevel}</Card>
                 </Box>
             </Stack>
             <Stack>

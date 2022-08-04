@@ -15,27 +15,111 @@ import { useNavigate } from 'react-router-dom';
 
 function UserInfoPage({user, onDelete}) {
 
+    const [email, setEmail] = useState(user.email_address)
+    const [username, setUsername] = useState(user.username)
+    const [updatedEmail, setUpdatedEmail] = useState("")
+    const [passwordField, setPasswordField] = useState("")
+    const [usernameField, setUsernameField] = useState("")
+    const [name, setName] = useState(user.name)
+
+    
     const navigate = useNavigate()
 
+
+    const [openEmail, setOpenEmail] = useState(false);
+    const [openUsername, setOpenUsername] = useState(false);
+
+    const handleOpenEmail = () => {
+        setOpenEmail(true);
+    };
+
+    const handleCloseEmail = () => {
+       
+        setOpenEmail(false);
+    };
+
+    const handleOpenUsername = () => {
+        setOpenUsername(true);
+    };
+
+    const handleCloseUsername = () => {
+       
+        setOpenUsername(false);
+    };
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        pt: 2,
+        px: 4,
+        pb: 3,
+    };
+
+
     const handleDeleteButton = (e) =>{
-         fetch('/users',{
+         fetch('/me',{
        method: "DELETE" 
     })
     onDelete(null)
     navigate('/signup')
     }
 
+    const handleEmailUpdate = (e) =>{
+        e.preventDefault();
+        fetch('/me', {
+            method: "PATCH",
+            headers: {"Content-Type":"application/json"}, 
+            body: JSON.stringify({
+                email_address: updatedEmail,
+                password: passwordField
+        })
+        })
+        .then(r =>r.json())
+        .then(console.log)
+        setEmail(updatedEmail)
+        setUpdatedEmail("")
+        setPasswordField("")  
+
+    }
+
+    
+    const handleUsernameUpdate = (e) =>{
+        e.preventDefault();
+        fetch('/me', {
+            method: "PATCH",
+            headers: {"Content-Type":"application/json"}, 
+            body: JSON.stringify({
+                username: usernameField,
+                password: passwordField
+        })
+        })
+        .then(r =>r.json())
+        .then(console.log)
+        setUsername(usernameField)
+        setUsernameField("")
+        setPasswordField("")
+       
+
+    }
+
+    
     
     const handleBackButton = (e) => {
         navigate('/settingsPage')
     }
 
-
+    console.log(updatedEmail)
     const nameCard = (
         <>
         <CardContent style={{ justifyContent: 'center' }}> 
         <Typography variant="h7" sx={{fontSize: 25}} component="div">
-                {user.name}
+                {name}
         </Typography>              
         </CardContent> 
         </>
@@ -46,25 +130,67 @@ function UserInfoPage({user, onDelete}) {
         <>
         <CardContent style={{ justifyContent: 'center' }}> 
         <Typography variant="h7" sx={{fontSize: 25}} component="div">
-                {user.email_address}
+                {email}
         </Typography>  
          </CardContent> 
         </>
     )
 
+
     const updateEmailButton = (
         <Stack>
             <CardActions style={{ justifyContent: 'center' }}>
-                <Button size="small"variant="contained">Update Email</Button>
+                <Button onClick={handleOpenEmail} size="small"variant="contained">Update Email</Button>
+                <Modal
+                justifyContent="space-between"
+                direction="column"
+                open={openEmail}
+                onClose={handleCloseEmail}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
+            >             
+             <Box sx={{ ...style, width: 400 }}>
+                <form  onSubmit={handleEmailUpdate}  id="emailupdate">
+             <TextField
+                        autoFocus
+                        margin="dense"
+                        id="Email-Address"
+                        name="Email-Address"
+                        label="New Email Adress"
+                        type="text"
+                        value= {updatedEmail}
+                        onChange={(e) =>setUpdatedEmail(e.target.value)}
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="Password"
+                        name="Password"
+                        type="password" 
+                        label="Confirm With Password"
+                        value= {passwordField}
+                        onChange={(e) =>setPasswordField(e.target.value)}
+                        fullWidth
+                        variant="standard"
+                    />
+               <Button  variant="contained"  type="submit" form="emailupdate" size="small">Accept</Button>
+               <Button onClick={handleCloseEmail} type="button">Back</Button>
+               </form>
+                
+                </Box>    
+            </Modal>
             </CardActions>            
         </Stack>
     )
 
+  
     const userNameCard = (
         <Stack direction ="column">
         <CardContent style={{ justifyContent: 'center' }}> 
         <Typography variant="h7" sx={{fontSize: 25}} component="div">
-                {user.username}
+                {username}
         </Typography>  
          </CardContent> 
         </Stack>
@@ -73,7 +199,49 @@ function UserInfoPage({user, onDelete}) {
     const changeUsernameButton = (
         <Stack>
             <CardActions style={{ justifyContent: 'center' }}>
-                <Button size="small"variant="contained">Change Username</Button>
+                <Button onClick={handleOpenUsername} size="small"variant="contained">Change Username</Button>
+                <Modal
+                justifyContent="space-between"
+                direction="column"
+                open={openUsername}
+                onClose={handleCloseUsername}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
+            >             
+             <Box sx={{ ...style, width: 400 }}>
+                <form  onSubmit={handleUsernameUpdate}  id="updateusername">
+             <TextField
+                        autoFocus
+                        margin="dense"
+                        id="Username"
+                        name="Username"
+                        label="New Username"
+                        type="text"
+                        value= {usernameField}
+                        onChange={(e) =>setUsernameField(e.target.value)}
+                        fullWidth
+                        variant="standard"
+                    />
+                     <TextField
+                        autoFocus
+                        margin="dense"
+                        id="Password"
+                        name="Password"
+                        type="password" 
+                        label="Confirm With Password"
+                        value= {passwordField}
+                        onChange={(e) =>setPasswordField(e.target.value)}
+                        fullWidth
+                        variant="standard"
+                    />
+               <Button  variant="contained"  type="submit" form="updateusername" size="small">Accept</Button>
+               <Button onClick={handleCloseUsername} type="button">Back</Button>
+               </form>
+                
+                </Box>    
+            </Modal>
+
+                
             </CardActions>            
         </Stack>
     )

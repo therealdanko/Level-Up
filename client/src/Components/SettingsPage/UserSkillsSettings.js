@@ -32,15 +32,21 @@ function UserSkillsSettings({user}){
     };
 
     
-    const handleSkillsClick = (e) => {
+    const handleMySkillsClick = (e) => {
      navigate('/userSkillPage')
         
     }
+
+     
+    const handleSkillsToLevelUpClick = (e) => {
+        navigate('/skillsToLevelUpPage')
+           
+       }
     
 
     return (
         <Stack justifyContent="space-between" direction="column">
-         <Button onClick={handleOpen} variant="contained" size="small">Update My Skills</Button>
+         <Button onClick={handleOpen} variant="contained" size="small">Update Skills Settings</Button>
          <Modal
                 justifyContent="space-between"
                 direction="column"
@@ -50,8 +56,9 @@ function UserSkillsSettings({user}){
                 aria-describedby="parent-modal-description"
             >             
              <Box sx={{ ...style, width: 400 }}>
-                {user.skills.map((skill) => <Button onClick={handleSkillsClick} variant="contained" size="small">{`${skill.name}`}</Button> 
-                )}
+               <Button onClick={handleMySkillsClick} variant="contained" size="small">My Skills</Button>
+               <Button onClick={handleSkillsToLevelUpClick} variant="contained" size="small">Skills To Level Up</Button>  
+                
                 </Box>   
             </Modal>
             </Stack>

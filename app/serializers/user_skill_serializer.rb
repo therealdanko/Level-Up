@@ -1,8 +1,9 @@
 class UserSkillSerializer < ActiveModel::Serializer
   
-  attributes :id, :video, :description, :experience, :credentials
+  attributes :id, :description, :experience, :credentials, :skill_id, :skill_name
   
-  belongs_to :user
-  belongs_to :skill
+  has_one :user
+  has_one :skill
+
 
 end

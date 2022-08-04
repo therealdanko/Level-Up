@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-    before_action :find_user
-    before_action :authorize_user, only: [:update, :destroy]
+    # before_action :find_user
+    
     skip_before_action :authenticate_user, only: [:create]
 
     def index	 
@@ -25,10 +25,21 @@ class UsersController < ApplicationController
     end
 
     # PATCH 
-    def update 
-       current_user.update!(post_params)
+    # def update_email
+    #    current_user.update!(email_params)
+    #     render json: current_user, status: :accepted        
+    # end
+
+    # def update_username
+    #     current_user.update!(username_params)
+    #     render json: current_user, status: :accepted 
+    # end
+
+     def update
+       current_user.update!(user_params)
         render json: current_user, status: :accepted        
     end
+
 
     #DELETE
 
@@ -44,7 +55,15 @@ class UsersController < ApplicationController
         params.permit(:username, :password, :password_confirmation, :name, :email_address, :profile_image)
     end
     
-    
+    # def email_params
+    #     params.permit(:email_adress, :password)
+    # end
+
+    # def username_params
+    #     params.permit(:username, :password)
+    # end
+
+
     def find_user
         @user = User.find_by(id: params[:id])
     end

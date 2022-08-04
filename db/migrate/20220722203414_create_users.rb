@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :email_address
       t.boolean :is_admin, default: false
+      t.string :profile_image
 
       t.timestamps
     end
