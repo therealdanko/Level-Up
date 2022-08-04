@@ -10,19 +10,31 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import LevelUpSkill from '../../Components/SettingsPage/LevelUpSkill';
+
 
 function SkillsToLevelUpPage({user}) {
 
-    const navigate = useNavigate()
+const navigate = useNavigate()
+
+let levelUpSkills = user.level_up_skills
+
+console.log(levelUpSkills)
+
+
 
 const handleBackButton = (e) => {
     navigate('/settingsPage')
 }
 
     return(
-        <>
-       
+        <> 
+   <Stack justifyContent="space-between" direction="column">
+        {levelUpSkills.map((skill) => <LevelUpSkill skill={skill}/>)}
+    <Stack>
         <Button onClick={handleBackButton}>Back</Button>
+        </Stack>
+        </Stack>
         </>
     )
 }

@@ -10,10 +10,9 @@ class ImageController < ApplicationController
             api_secret: ENV['api_secret'], 
             resource_type: 'image'
          }
-        
+      byebug
         uploaded = Cloudinary::Uploader.upload(file, auth)
-       
-         render json: uploaded
+        render json: uploaded
     end
 
 end

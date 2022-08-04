@@ -54,4 +54,8 @@ gem "cloudinary"
 
 gem "activerecord-reset-pk-sequence"
 
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+
+gem 'unsplash'
 

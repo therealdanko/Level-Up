@@ -1,15 +1,19 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+import Axios from 'axios'
 
-function UploadImage() {
+function UploadImage({user,  handleUserImage} ) {
 
     const [file, setFile] = useState("")
+    const imageRef = useRef()
     const [open, setOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
+
     const handleOpen = () => {
         setOpen(true);
     };
@@ -35,40 +39,48 @@ function UploadImage() {
 
   const handeImageSubmit = (e) =>{
     e.preventDefault();
+    // setIsLoading(true)
     const data = new FormData();
     console.log("yoo")
     console.log(file)
    data.append("file", file)
    data.append("upload_preset", "fejnxdld")
-    fetch("/image", {
-     method: "POST",
-   })
-    .then((res) => res.json())
-  .then(console.log)
+   console.log(data)
+    Axios.post("https://api.cloudinary.com/v1_1/dxzmccchh/image/upload", 
+   data)
+    .catch(error => console.log(error))
+    .then((res) => {
+        
+        console.log(res)
+        // setIsLoading(false)
+        if(res.status === 200){
+            console.log("from if block")
+        handleUserImage(res.data.secure_url)
+        uploadToBackEnd(res.data.secure_url)
+    } else {
+        // setIsLoading(false)
+        // alert("File error, try again or choose another file!")
+        // imageRef.current.value=""
+    }
+    })
+ 
 
  }
 
-//  function UploadForm(){
-
-//     return(
-//         <> 
-//         <Box
-//         onSubmit={handeImageSubmit}
-//         component="form"
-//         sx={{
-//           '& > :not(style)': { m: 1, width: '25ch' },
-//         }}
-//         noValidate
-//         autoComplete="off"
-//       >
-//         <input type="file" onChange={(e) => setFile(e.target.files[0])}>
-// #           </input>
-// #         <input type="submit"></input>
-//         {/* <TextField id="outlined-basic"  label="Outlined" variant="outlined" /> */}
-//       </Box>
-//         </>
-//     )
-//  }
+ const uploadToBackEnd = (url) => {
+    console.log("in backend")
+    fetch('/me', {
+        method: "PATCH",
+        headers: {"Content-Type":"application/json"}, 
+        body: JSON.stringify({
+            profile_image: url         
+    })
+    })
+    .then(r => r.json())
+    .then(console.log)
+    handleUserImage(url)
+    setFile("")
+ }
 
 
 
@@ -82,14 +94,20 @@ function UploadImage() {
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
+      
                 <Box sx={{ ...style, width: 400 }}>
-                     
+                {/* <Box>
+         {isLoading ? <p>Loading...</p> : null}
+         </Box> */}
      {/* refactor to use MUI components and styling */}
 
-                     <form onSubmit={handeImageSubmit}>
+                     <form ref={imageRef} onSubmit={handeImageSubmit}>
+         
          <input type="file" onChange={(e) => setFile(e.target.files[0])}>
         </input>
-        <input type="submit"></input>
+    
+        <input type="submit"></input> 
+     
      </form> 
                     {/* <UploadForm/>                  */}
                 </Box>

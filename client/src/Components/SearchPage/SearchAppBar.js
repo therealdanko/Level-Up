@@ -9,44 +9,20 @@ import Select from '@mui/material/Select';
 import {useState, useEffect} from 'react'
 import { convertLength } from '@mui/material/styles/cssUtils';
 
-function SearchAppBar({user}) {
+function SearchAppBar({user, skills, handleSelectedSkill, handleClick, selectedSkill}) {
 
-    const [skillLeveling, setSkillLeveling] = useState('');
-    const [mySkill, setMySkill] = useState('')
-    const [skillsList, setSkillsList] = useState([])
-    const [userSkills, setUserSkills] = useState([])
-
-    const userSkillList = () =>{
-        const mySkills = user.skills
-       
-        setUserSkills(mySkills)
-        console.log(mySkills)
-       
-    }
-
-
-  
-
-    useEffect(() => {
-        fetch('/skills').then((resp) => {
-          if (resp.ok) {
-            resp.json().then((skillsList) => {
-                setSkillsList(skillsList)
-                userSkillList()
-            })            
-            
-          }
-        })
-      },[])
-
+   
 
     const handleLookingChange = (event) => {
-        setSkillLeveling(event.target.value);
+        
+      handleSelectedSkill(event.target.value)
+
+         console.log(event.target.value)
+        
       };
       
-    const handleMySkillChange = (event) => {
-        setMySkill(event.target.value);
-      };
+  
+    
 
     return(
         <>
@@ -58,30 +34,30 @@ function SearchAppBar({user}) {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={skillLeveling}
-          label="Age"
+          value={selectedSkill}
+          label="SkillLeveling"
           onChange={handleLookingChange}
         >
-            {skillsList.map((skill) =>  <MenuItem value={skill}>{`${skill.name}`}</MenuItem>)}
+            {skills.map((skill) =>  <MenuItem onClick={handleClick} value={skill}>{`${skill.name}`}</MenuItem>)}
          
         </Select>
       </FormControl>
       </Stack>
-      <Stack justifyContent="space-between" direction="row">
+      {/* <Stack justifyContent="space-between" direction="row">
               <FormControl sx={{ m: 1, minWidth: 110, width: 110 }} size="small">
         <InputLabel id="demo-simple-select-label">My Skill</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={mySkill}
-          label="Age"
+          label="MySkill"
           onChange={handleMySkillChange}
         >
-            {userSkills.map((skill) =>  <MenuItem value={skill}>{`${skill.name}`}</MenuItem>)}
+            {user.skills.map((skill) =>  <MenuItem value={skill}>{`${skill.name}`}</MenuItem>)}
          
         </Select>
       </FormControl>
-      </Stack>
+      </Stack> */}
 </Stack>
               </AppBar>
         </>

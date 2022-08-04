@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_26_025012) do
+ActiveRecord::Schema.define(version: 2022_08_02_142242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "level_up_skills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "read", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
@@ -21,19 +45,18 @@ ActiveRecord::Schema.define(version: 2022_07_26_025012) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "skills_to_level_ups", force: :cascade do |t|
+  create_table "user_level_up_skills", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "skill_id", null: false
+    t.bigint "level_up_skill_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["skill_id"], name: "index_skills_to_level_ups_on_skill_id"
-    t.index ["user_id"], name: "index_skills_to_level_ups_on_user_id"
+    t.index ["level_up_skill_id"], name: "index_user_level_up_skills_on_level_up_skill_id"
+    t.index ["user_id"], name: "index_user_level_up_skills_on_user_id"
   end
 
   create_table "user_skills", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
-    t.string "video"
     t.string "description"
     t.string "experience"
     t.string "credentials"
@@ -49,13 +72,15 @@ ActiveRecord::Schema.define(version: 2022_07_26_025012) do
     t.string "name"
     t.string "email_address"
     t.boolean "is_admin", default: false
+    t.string "profile_image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "profile_image"
   end
 
-  add_foreign_key "skills_to_level_ups", "skills"
-  add_foreign_key "skills_to_level_ups", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
+  add_foreign_key "user_level_up_skills", "level_up_skills"
+  add_foreign_key "user_level_up_skills", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end
