@@ -8,7 +8,9 @@ def index
 end
 
 def show
-    render json: @user_skill
+    selected_user = User.find(params[:id])
+    
+    render json: selected_user
 end
 
 def create 
