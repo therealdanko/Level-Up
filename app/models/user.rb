@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_many :skills, through: :user_skills
   has_many :user_level_up_skills, dependent: :destroy
   has_many :level_up_skills, through: :user_level_up_skills
+  has_many :sender_conversations, class_name: 'Conversation', foreign_key: 'sender_id'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'receiver_id'
+  has_many :messages, dependent: :destroy
   
 
   has_secure_password
@@ -19,6 +22,16 @@ class User < ApplicationRecord
 
   validate :password_contains_number, on: :create
 
+  scope :all_except, ->(user) {where.not(id: user.id)}
+
+#   def get_convo_users 
+#     convo_user_ids = self.conversations.pluck(convo_user_ids).map do |conversation|
+#         conversation.convo_user_id
+#     end
+#     convo_users = User.all.where(id: convo_user_ids)
+#     convo_users.filter do |convo_user|
+#         convo_user.conversations.where(convo_user_id: self.id)[0] && convo_user.conversation.where(convo_user_id: self.id)[0][
+#   end
 
   def password_uppercase
       return if password.present? && !!password.match(/\p{Upper}/)

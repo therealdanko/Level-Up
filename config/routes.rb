@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   
+mount ActionCable.server => "/cable"
   
+resources :messages
+resources :conversations
+resources :conversations do
+  resources :messages
+end
 
-  resources :conversations, only: [:index, :create] do
-    resources :messages, only: [:index, :create]
-  end
   
 resources :user_level_up_skills
 resources :level_up_skills
@@ -19,8 +22,12 @@ resources :users
  delete "/logout", to: "sessions#destroy"
  patch "/me", to: "users#update"
  delete "/me", to: "users#destroy"
-#  get "/select_skill_users/:id", to: "skills#show", as: "selected_skill_show"
+ get "/user_skills/:id", to: "user_skills#show"
 
-#  patch "/email", to: "users#update_email"
-#  patch "/username", to: "users#update_username"
+ get "/conversations", to: "conversations#index"
+ post "/conversations", to: "conversations#create"
+ 
+ get "/conversations/:conversation_id/messages", to: "messages#index"
+ post "/conversations/:conversation_id/messages", to: "messages#create"
+
 end

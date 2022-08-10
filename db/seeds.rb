@@ -8,6 +8,8 @@ Skill.destroy_all
 Skill.reset_pk_sequence
 LevelUpSkill.destroy_all
 LevelUpSkill.reset_pk_sequence
+UserLevelUpSkill.destroy_all
+UserLevelUpSkill.reset_pk_sequence
 
 
 puts "Starting Seeding..."
@@ -92,190 +94,190 @@ eli = User.create(
                         )
 
 
-# test1 = User.create(
-#     username: "Test1", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test1@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test1 = User.create(
+    username: "Test1", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test1@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
 
-# test2 = User.create(
-#     username: "Test2", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test2@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
-
-
-# test3 = User.create(
-#     username: "Test3", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test3@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test2 = User.create(
+    username: "Test2", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test2@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
 
 
-# test4 = User.create(
-#     username: "Test4", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test4@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test3 = User.create(
+    username: "Test3", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test3@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
 
 
-# test5 = User.create(
-#     username: "Test5", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test5@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test4 = User.create(
+    username: "Test4", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test4@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
 
 
-# test6 = User.create(
-#     username: "Test6", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test6@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test5 = User.create(
+    username: "Test5", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test5@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
 
 
-# test7 = User.create(
-#     username: "Test7", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test7@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test6 = User.create(
+    username: "Test6", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test6@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
+
+
+test7 = User.create(
+    username: "Test7", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test7@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
   
 
-# test8 = User.create(
-#     username: "Test8", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test8@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test8 = User.create(
+    username: "Test8", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test8@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
        
 
-# test9 = User.create(
-#     username: "Test9", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test9@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test9 = User.create(
+    username: "Test9", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test9@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
         
 
-# test10 = User.create(
-#     username: "Test10", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test10@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test10 = User.create(
+    username: "Test10", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test10@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
               
-# test11 = User.create(
-#     username: "Test11", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test11@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test11 = User.create(
+    username: "Test11", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test11@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
               
-# test12 = User.create(
-#     username: "Test12", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test12@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test12 = User.create(
+    username: "Test12", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test12@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
               
-# test13 = User.create(
-#     username: "Test13", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test13@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test13 = User.create(
+    username: "Test13", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test13@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
               
-# test14 = User.create(
-#     username: "Test14", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test14@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test14 = User.create(
+    username: "Test14", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test14@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
               
-# test15 = User.create(
-#     username: "Test15", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test15@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test15 = User.create(
+    username: "Test15", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test15@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
               
-# test16 = User.create(
-#     username: "Test16", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test16@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test16 = User.create(
+    username: "Test16", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test16@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
  
     
-# test17 = User.create(
-#     username: "Test17", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test17@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test17 = User.create(
+    username: "Test17", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test17@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
                   
-# test18 = User.create(
-#     username: "Test18", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test18@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test18 = User.create(
+    username: "Test18", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test18@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
                   
-# test19 = User.create(
-#     username: "Test19", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test19@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test19 = User.create(
+    username: "Test19", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test19@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
                   
-# test20 = User.create(
-#     username: "Test20", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test20@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test20 = User.create(
+    username: "Test20", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test20@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
                   
-# test21 = User.create(
-#     username: "Test21", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test21@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)
+test21 = User.create(
+    username: "Test21", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test21@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)
                   
-# test22 = User.create(
-#     username: "Test22", 
-#     password:"Test1234!", 
-#     password_confirmation:"Test1234!", 
-#     name: Faker::Name.unique.name,
-#     email_address: "test22@test.com",
-#     profile_image:Unsplash::Photo.random(query:"person").urls.small)   
+test22 = User.create(
+    username: "Test22", 
+    password:"Test1234!", 
+    password_confirmation:"Test1234!", 
+    name: Faker::Name.unique.name,
+    email_address: "test22@test.com",
+    profile_image:Unsplash::Photo.random(query:"person").urls.small)   
 
 
     # 20.times do
@@ -331,209 +333,209 @@ UserSkill.create(user_id: 6, skill_id: Skill.ids[41], description: "It is easier
 
 
 
-# 3.times do
-#     UserSkill.create(user_id: 7, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 7, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 8, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 8, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 9, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 9, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
     
-# 3.times do
-#     UserSkill.create(user_id: 10, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 10, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 11, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 11, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 12, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 12, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 13, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 13, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 14, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 14, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 15, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 15, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 16, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 16, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 17, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 17, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 18, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 18, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 19, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 19, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 20, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 20, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 21, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 21, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 22, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 22, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 23, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 23, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 24, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 24, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 25, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 25, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 26, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 26, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 27, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 27, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 28, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
+3.times do
+    UserSkill.create(user_id: 28, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
-# 3.times do
-#     UserSkill.create(user_id: 29, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
-# end
-
-
+3.times do
+    UserSkill.create(user_id: 29, skill_id: Skill.ids.sample, description: descriptionList.sample, credentials: credentialsList.sample)
+end
 
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 1, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 2, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 3, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 1, level_up_skill_id: LevelUpSkill.ids.sample)
+end
+
+3.times do
+    UserLevelUpSkill.create(user_id: 2, level_up_skill_id: LevelUpSkill.ids.sample)
+end
+
+3.times do
+    UserLevelUpSkill.create(user_id: 3, level_up_skill_id: LevelUpSkill.ids.sample)
+end
     
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 4, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 4, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 5, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 5, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 6, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 6, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 7, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 7, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 10, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 10, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 11, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 11, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 12, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 12, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 13, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 13, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 14, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 14, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 15, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 15, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 16, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 16, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 17, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 17, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 18, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 18, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 19, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 19, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 20, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 20, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 21, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 21, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 22, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 22, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 23, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 23, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 24, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 24, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 25, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 25, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 26, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 26, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 27, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 27, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 28, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 28, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
-# 3.times do
-#     UserLevelUpSkill.create(user_id: 29, level_up_skill_id: LevelUpSkill.ids.sample)
-# end
+3.times do
+    UserLevelUpSkill.create(user_id: 29, level_up_skill_id: LevelUpSkill.ids.sample)
+end
 
 
 

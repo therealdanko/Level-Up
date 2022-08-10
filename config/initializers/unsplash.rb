@@ -1,6 +1,6 @@
 Unsplash.configure do |config|
-    config.application_access_key = "s4gSCVe-z8N9B3NNi-Fe6oCuWbvYbkDB4VTLW71_f0k"
-    config.application_secret = "A1PII_g-jaBUXpt3SOVOlIpfMLazzFNEwtxlezayNmU"
+    config.application_access_key = "mDUootVhXKWGlNLlrWuMIcErftpJ9w5vfXPqW4UG24U"
+    config.application_secret = "w-rrgjqfaRRkt3laFw8Wtl-pg__Iy3uom2sXP_P3F6E"
     config.application_redirect_uri = "urn:ietf:wg:oauth:2.0:oob"
     config.utm_source = "LevelUp"
   

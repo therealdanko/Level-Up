@@ -10,22 +10,41 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Modal from '@mui/material/Modal';
+import UserSkill from './UserSkill'
+import LevelUpSkill from './LevelUpSkill'
 
 
 
 function Profile({objUser, selectedSkill}) {
 
     const navigate = useNavigate()
+    const id = objUser.id
+    const [selectedUser, setSelectedUser] = useState(null)
     const [open, setOpen] = useState(false);
+    
+    
     const handleOpen = () => {
+        fetch(`/user_skills/${id}`).then((res) => {
+            if(res.ok){
+                res.json().then ((user)=> {
+                    setSelectedUser(user)
+                    console.log(user)
+                })
+            }
+        })
+
         setOpen(true);
     };
+    
+    
     const handleClose = () => {
         setOpen(false);
     };
 
+  
     const imageCard = (
         <>
+         <Stack direction="column">
          <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
             <CardContent>
                 <CardMedia
@@ -36,18 +55,30 @@ function Profile({objUser, selectedSkill}) {
                 />
             </CardContent>
             </Box>
+            </Stack>
         </>
     );
 
     const userInfo = (
+        
 <>
-<Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
-    
+<Stack direction="column">
+<Box sx={{ padding: ".1vh", minWidth: 275, width: 100, justifyContent: "center", alignItems: "center" }}>
+<CardContent style={{ justifyContent: 'center' }}> 
+        <Typography variant="h6" sx={{fontSize: 15}} component="div">
+                {objUser.name}
+        </Typography>              
+        </CardContent> 
 </Box>
+</Stack>
 </>
-
     )
-    
+
+  
+
+
+   console.log(selectedUser)
+
 
     const style = {
         position: 'absolute',
@@ -66,6 +97,7 @@ function Profile({objUser, selectedSkill}) {
 
   return (
     <Stack justifyContent="space-between" direction="column">
+         <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
          <Button onClick={handleOpen} variant="contained" size="small">Profile</Button>
          <Modal
                 justifyContent="space-between"
@@ -75,15 +107,40 @@ function Profile({objUser, selectedSkill}) {
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >             
-             <Box sx={{ ...style, width: 400 }}>
+             <Box sx={{padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center", ...style, width: 400 }}>
                 <Stack>
-                <Card>{imageCard}</Card> 
+                {userInfo}
                 </Stack>
                 <Stack>
-                <Card> </Card>
-                    </Stack>
-                </Box>   
-            </Modal>
+                <Card>{imageCard}</Card>
+                </Stack>
+                <Stack>
+                <Box sx={{ padding: "1vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
+        <Typography variant="h1" sx={{fontSize: 15}} component="div">
+            Skills
+        </Typography>
+        </Box> 
+        </Stack>
+                <Stack>                
+                {selectedUser ? selectedUser.user_skills.map((user_skill) => 
+                        <UserSkill user_skill={user_skill}/>
+                        ) : null}
+                      </Stack> 
+                      <Box sx={{ padding: "1vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
+            <Typography variant="h1" sx={{fontSize: 15}} component="div">
+           Skills I am looking to Level Up
+        </Typography>
+        <Stack>
+                <Card>{selectedUser ? selectedUser.level_up_skills.map((level_up_skill) => <LevelUpSkill level_up_skill={level_up_skill}/>): null}</Card>
+                </Stack>
+        </Box> 
+         <Button onClick={handleClose}>Back</Button>
+                </Box> 
+           
+            </Modal>      
+           
+            </Box>
+           
     </Stack>
   )
 }
