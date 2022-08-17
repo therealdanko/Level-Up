@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import Profile from './Profile';
 
 
-function SearchUserCard({objUser, selectedSkill}) {
+function SearchUserCard({objUser, selectedSkill, selectedUser, handleSelectedUser, handleCreateConversation}) {
     console.log(objUser)
     console.log(selectedSkill)
 
@@ -24,7 +24,7 @@ function SearchUserCard({objUser, selectedSkill}) {
        {objUser.name}
         </Typography> 
         <CardActions style={{ justifyContent: 'center' }}>        
-            <Profile objUser={objUser} selectedSkill={selectedSkill} />
+            <Profile handleCreateConversation={handleCreateConversation} selectedUser={selectedUser} handleSelectedUser={handleSelectedUser} objUser={objUser} selectedSkill={selectedSkill} />
         </CardActions>
         </Box>       
       </Stack>

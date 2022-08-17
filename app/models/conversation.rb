@@ -10,7 +10,8 @@ class Conversation < ApplicationRecord
     end
 
     scope :between, -> (sender_id, receiver_id) do
-        where("(conversations.sender.id = ? AND conversations.receiver_id = ?) OR (conversations.receiver_id = ? AND conversations.sender_id = ?)", sender_id, receiver_id, receiver_id, sender_id)
+        where("(conversations.sender_id = ? AND conversations.receiver_id = ?) OR (conversations.receiver_id = ? AND conversations.sender_id = ?)", sender_id, receiver_id, receiver_id, sender_id)
     end
+
 
 end

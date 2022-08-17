@@ -3,7 +3,7 @@ import { Routes, Route} from 'react-router-dom';
 import HomePage from './Pages/HomePage/HomePage';
 import LoginPage from './Pages/Access/LoginPage'
 import SignUpPage from './Pages/Access/SignUpPage'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import BottomNavBar from './Components/BottomNavBar'
 import { createTheme, ThemeProvider} from '@mui/material/styles';
 import { blueGrey} from '@mui/material/colors'
@@ -13,18 +13,43 @@ import SearchPage from './Pages/SearchPage/SearchPage';
 import UserSkillPage from './Pages/SettingsPage/UserSkillPage'
 import UserInfoPage from './Pages/SettingsPage/UserInfoPage';
 import SkillsToLevelUpPage from './Pages/SettingsPage/SkillsToLevelUpPage'
+import Conversation from './Components/MessagesPage/Conversation';
+import { useNavigate } from 'react-router-dom';
+import { Email } from './Components/SearchPage/Email';
+import { integerPropType } from '@mui/utils';
+
 
 
 function App() {
+  
+  const ref = useRef()
 
-  // const [users, setUsers] = useState([])
   const [user, setUser] = useState(null)
   const [skills, setSkills] = useState([])
   const [selectedSkill, setSelectedSkill] = useState({})
+  const [selectedUser, setSelectedUser] = useState(null)
+  const [conversations, setConversations] = useState(null)
+  const [conversation, setConversation] = useState(null)
+  const [userSkills, setUserSkills] = useState([])
+
+  console.log(userSkills)
+
+  const navigate = useNavigate()
 
   const handleSelectedSkill = (selected) => {
     setSelectedSkill(() => (selected))
   }
+ 
+  const handleSelectedUser = (selected) =>{
+    setSelectedUser(() => (selected))
+
+  }
+
+  const handleSelectedConvo =(selected) => {
+    setConversation(() => (selected))
+  }
+
+
 
   const theme = createTheme({
     palette: {
@@ -38,6 +63,29 @@ function App() {
   })
 
   
+  useEffect(() => {
+    fetch("/conversations")
+     .then((r) => r.json())
+     .then((data) => {
+        setConversations(data);
+     });
+}, [user]);
+
+const handleCreateConversation = (id) => {
+  console.log(id)
+  fetch("/conversations", {
+     method: "POST",
+     headers: {
+        "Content-Type": "application/json",
+     },
+     body: JSON.stringify({sender_id: user.id, receiver_id: id})
+  }).then((r) => r.json()
+  .then((conversation) => {
+     setConversations([...conversations, conversation])
+     navigate(`/messagesPage/${conversation.id}`)
+  }));
+}
+
 
   useEffect(() => {
     fetch('/me').then((resp) => {
@@ -62,17 +110,21 @@ function App() {
 
   }
   
+ 
   
   useEffect(() => {
     fetch('/skills').then((resp) => {
       if (resp.ok) {
         resp.json().then((skillsList) => {
           setSkills(skillsList)
+          setUserSkills(user.skills)
 })            
         
       }
     })
   },[])
+
+
 
   // if(!selectedSkill) return null;
   
@@ -90,7 +142,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="App" >      
        <ThemeProvider theme={theme}>
       <Routes> 
         <Route path="/homePage" 
@@ -98,20 +150,38 @@ function App() {
         user={user} 
         onLogOut={setUser}/>}/>
 
+        <Route path="/email" element={<Email user={user} selectedUser={selectedUser} />}/>
+
         <Route path="/searchPage" 
         element={<SearchPage 
         user={user}
-        // users={users}
+        selectedUser={selectedUser}
+        handleSelectedUser={handleSelectedUser}
         skills={skills}
         selectedSkill={selectedSkill}
         handleFindUsers={handleFindUsers}
+        handleCreateConversation={handleCreateConversation}
         handleSelectedSkill={handleSelectedSkill}
         onLogOut={setUser}/>}/>
 
         <Route path="/messagesPage" 
         element={<MessagesPage 
+        handleSelectedUser={handleSelectedUser}  
+        conversations={conversations}
+        handleSelectedConvo={handleSelectedConvo}
+        selectedUser={selectedUser}
         user={user} 
         onLogOut={setUser}/>}/>
+
+     
+
+        <Route path="/messagesPage/:id" 
+        element={<Conversation 
+        user={user}
+        conversation={conversation} 
+        selectedUser={selectedUser} 
+        handleSelectedUser={handleSelectedUser} 
+        conversations={conversations}/>} />
 
         <Route path="/settingsPage" 
         element={<SettingsPage
@@ -121,7 +191,8 @@ function App() {
 
         <Route path="/userSkillPage" 
         element={<UserSkillPage 
-        skills={skills} 
+        userSkills={userSkills}
+        skills={skills}
         user={user}
         selectedSkill={selectedSkill}
         setSelectedSkill={setSelectedSkill}

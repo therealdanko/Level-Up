@@ -15,6 +15,12 @@ class UsersController < ApplicationController
     else
         render json: { errors: "No active session" }, status: :unauthorized
     end
+   
+    end
+
+    def convo_user
+        find_user
+        render json: find_user, status: :ok
     end
     
       # POST '/signup'

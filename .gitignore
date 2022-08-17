@@ -34,4 +34,5 @@ node_modules
 # Ignore application configuration
 /config/application.yml
 /config/api_key.rb
+/config/initializers/unsplash.rb
 

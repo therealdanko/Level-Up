@@ -32,11 +32,6 @@ function UserSkill({user_skill}) {
           </Typography> 
          
                   </Box> 
-          <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
-          <Typography justifyContent="center" variant="h7" sx={{fontSize: 15}} component="div">
-         {}
-          </Typography> 
-            </Box>      
         </Stack>
       )
 

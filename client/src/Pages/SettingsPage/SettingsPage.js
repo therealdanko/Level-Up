@@ -17,7 +17,7 @@ import EditUserInfo from '../../Components/SettingsPage/EditUserInfo';
 
 
 
-function SettingsPage({ onLogOut, user}) {
+function SettingsPage({ onLogOut, user, userSkills}) {
 
     const navigate = useNavigate()
    

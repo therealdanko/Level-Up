@@ -10,6 +10,10 @@ LevelUpSkill.destroy_all
 LevelUpSkill.reset_pk_sequence
 UserLevelUpSkill.destroy_all
 UserLevelUpSkill.reset_pk_sequence
+Conversation.destroy_all
+Conversation.reset_pk_sequence
+Message.destroy_all
+Message.reset_pk_sequence
 
 
 puts "Starting Seeding..."
