@@ -18,7 +18,10 @@ function SearchPage({
     handleFindUsers, 
     handleSelectedSkill, 
     skills, 
-    selectedSkill
+    selectedSkill, 
+    selectedUser, 
+    handleSelectedUser,
+    handleCreateConversation
 }){
 
     const navigate = useNavigate()
@@ -38,7 +41,13 @@ function SearchPage({
         skills={skills} 
         user={user}/>
         <Stack>
-        {selectedUsers ? selectedUsers.map((objUser) => <SearchUserCard selectedSkill={selectedSkill} objUser={objUser}/>) : null}
+        {selectedUsers ? selectedUsers.map((objUser) => 
+        <SearchUserCard 
+        selectedUser={selectedUser} 
+        handleSelectedUser={handleSelectedUser} 
+        selectedSkill={selectedSkill}
+        handleCreateConversation={handleCreateConversation} 
+        objUser={objUser}/>) : null}
         </Stack>
         <Stack/>
         </>

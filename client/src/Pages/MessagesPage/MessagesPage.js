@@ -2,148 +2,86 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
-import {useEffect, useRef, useState} from 'react-router';
+import {useEffect, useRef, useState} from 'react';
 import { useParams} from 'react-router';
 import { MultiSelectUnstyled } from '@mui/base';
-import ChatInput from '../../Components/MessagesPage/ChatInput';
+import ConversationCard from '../../Components/MessagesPage/ConversationCard';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Card from '@mui/material/Card';
+import { CardContent } from '@mui/material';
 
 
-function MessagesPage({onLogOut, user, recipient, cable}){
+function MessagesPage({onLogOut, 
+  user, 
+  selectedUser, 
+  conversations, 
+  handleSelectedUser,
+  handleSelectedConvo}){
 
-    const [messages, setMessages] = useState([])
+   
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (user.id) {
-          fetch(`/api/users/${user.id}/message_history`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              sender_id: user.id,
-              recipient_id: recipient.id, 
-            })
-          })
-          .then((r) => {
-            if (r.ok) {
-              r.json().then((data) => {
-                setMessages(data)
-              })
-            }
-          })
-        }    
-      }, [user.id, recipient.id, setMessages])
-    
-      useEffect(() => {    
-        if (user.id) {
-          cable.subscriptions.create
-          (
-            {
-              channel: 'ChatsChannel',
-              user_id: user.id,
-              recipient_id: recipient.id
-            },
-            {
-              received: (message) => {
-                setMessages([...messages, message])
-              }
-            }
-          )
-        }
-      }, [user.id, cable.subscriptions, recipient.id, setMessages, messages])
-    
+    // let renderConversations 
+    // if (conversations && selectedUser) {renderConversations = conversations.map((conversation) => {
+
+    //   return(
+    //     <ConversationCard 
+    //     key={conversation.id} 
+    //     id={conversation.id}
+    //     sender={conversation.sender} 
+    //     receiver={conversation.receiver} 
+    //     messages={conversation.messages}
+    //     user={user}
+    //     selectedUser={selectedUser}
+        
+    //     />
+    //   )
+
+    // })}
+
+    // const renderConversations = (
+    //   {conversations ? conversations.map((conversation) => <ConversationCard 
+    //     key={conversation.id} 
+    //       id={conversation.id}
+    //       sender={conversation.sender} 
+    //       receiver={conversation.receiver} 
+    //       messages={conversation.messages}
+    //       user={user}
+    //       selectedUser={selectedUser}/>) : null}
+    // )
+   
 
     return(
         <>
-        <Stack>
- 
+      <Stack justifyContent="space-between" direction="column">
+      <Box sx={{ padding: "1vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
+        <Card>
+        <Typography variant="h6" sx={{fontSize: 15}} component="div">
+                Messages
+        </Typography>
+        </Card>          
+<Stack direction="column">
+  
+  {conversations ? conversations.map((conversation) => <Box sx={{ padding: ".75vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}><Card sx={{ minHeight: 50}}><ConversationCard 
+        key={conversation.id} 
+          id={conversation.id}
+          conversation={conversation}
+          sender={conversation.sender} 
+          receiver={conversation.receiver} 
+          messages={conversation.messages}
+          handleSelectedUser={handleSelectedUser}
+          handleSelectedConvo={handleSelectedConvo}
+          user={user}
+          selectedUser={selectedUser}/></Card></Box>) : null}
+
+</Stack>
+        </Box>
         </Stack>
         </>
     )
 }
 
 export default MessagesPage
-
-//    const  renderMessages = () => {
-//         return user.messages.map(mess => {
-//             return <li key ={mess.id}>{mess.name}:{mess.body}</li>
-//         })
-//     }
-
-//     const handleBroadCast = (data) =>{
-//         console.log(data)
-//     }
-//     const render = () => {
-//         if (!user.channel){
-//             return <h1>Loading...</h1>
-//         }
-//         return (
-//             <div className = "chat-container">
-//                 <ActionCableConsumer
-//                 channel={{channel: "conversation_channel", id: user.channel.id}}
-//                 onReceived={handleBroadCast}
-//                 />
-//                 <h1>{user.channel.name}</h1>
-//                 {renderMessages(user.channel)}
-//                 <MessageForm key={user.channel.id}/>
-//             </div>
-//         )
-//     }
-
-//     const [messages, setMessages] = useState([])
-//     const params = useParams()
-//     const [newMessage, setNewMessage] = useState("")
-//     const cable = useRef()
-//     useEffect(() =>{
-//     //    const cable = createConsumer('ws://localhost:3000')
-
-//     if (!cable.current){
-//         cable.current = createConsumer('ws://localhost:3000/cable')
-//     }
-//         const paramsToSend ={
-//             channel : "ConversationChannel",
-//             id: params.id
-//         }
-
-//         const handlers = {
-//             received(data) {
-//                 setMessages([...messages, data])
-//             },
-//             connected() {
-//                 console.log("connected")
-//             },
-//             disconnected(){
-//                 console.log("disconnected")
-//                 cable.current = null
-//             }
-//         }
-//         const subscription = cable.subscriptions.create(paramsToSend, handlers)
-        
-//         return function cleanup(){
-//             console.log("unsubbed from ", params.id)
-//             cable.current = null
-//             subscription.unsubscribe()
-//         }
-   
-//     }, [params.id, messages])
-
-//  function handleSubmit(e) {
-//     e.preventDefault()
-//     if (newMessage !== '') {
-//         setNewMessage('')
-//         fetch('http://localhost:3000/messages', {
-//             method: 'POST',
-//             headers: {
-//                 'content-type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 body: newMessage,
-//                 conversation_id: params.id, 
-//                 user_id: user.id
-//             })
-//         })
-//     }
-
-//  }

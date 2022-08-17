@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
+import Pubnub from 'pubnub';
 
 function LoginPage({ onLogin }) {
 
@@ -34,7 +35,9 @@ function LoginPage({ onLogin }) {
             .then(res => {
                 setIsLoading(false)
                 if (res.ok) {
-                    res.json().then((user) => onLogin(user))
+                    res.json().then((user) => {
+                        onLogin(user)
+                    })
                     navigate('/homepage')
                 } else {
                     res.json().then((err) => {

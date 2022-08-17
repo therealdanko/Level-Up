@@ -23,11 +23,13 @@ resources :users
  patch "/me", to: "users#update"
  delete "/me", to: "users#destroy"
  get "/user_skills/:id", to: "user_skills#show"
+ get "/users/:id", to: "users#convo_user"
+ post "user_skills", to: "user_skills#create"
 
  get "/conversations", to: "conversations#index"
  post "/conversations", to: "conversations#create"
  
- get "/conversations/:conversation_id/messages", to: "messages#index"
- post "/conversations/:conversation_id/messages", to: "messages#create"
+ get "/conversation/:conversation_id/messages", to: "messages#index"
+ post "/conversation/:conversation_id/messages", to: "messages#create"
 
 end

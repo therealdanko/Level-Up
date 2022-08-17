@@ -12,27 +12,34 @@ import CardMedia from '@mui/material/CardMedia';
 import Modal from '@mui/material/Modal';
 import UserSkill from './UserSkill'
 import LevelUpSkill from './LevelUpSkill'
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import EmailIcon from '@mui/icons-material/Email';
+import Email from './Email'
 
 
 
-function Profile({objUser, selectedSkill}) {
+function Profile({objUser, selectedSkill, selectedUser, handleSelectedUser, handleCreateConversation}) {
 
     const navigate = useNavigate()
     const id = objUser.id
-    const [selectedUser, setSelectedUser] = useState(null)
     const [open, setOpen] = useState(false);
     
-    
+    // const handleSendMessage = () =>{
+    //     handleCreateConversation(selectedUser.id)
+
+    //     console.log("message")
+    //     // navigate('/')
+    // }
+
     const handleOpen = () => {
         fetch(`/user_skills/${id}`).then((res) => {
             if(res.ok){
                 res.json().then ((user)=> {
-                    setSelectedUser(user)
-                    console.log(user)
+                    handleSelectedUser(user)
+                    console.log(user.id)
                 })
             }
         })
-
         setOpen(true);
     };
     
@@ -95,6 +102,10 @@ function Profile({objUser, selectedSkill}) {
     };
 
 
+    const handleClick = () => {
+        navigate('/email')
+    }
+
   return (
     <Stack justifyContent="space-between" direction="column">
          <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
@@ -111,11 +122,17 @@ function Profile({objUser, selectedSkill}) {
                 <Stack>
                 {userInfo}
                 </Stack>
-                <Stack>
+                <Stack>  
+                    <ChatBubbleOutlineIcon  
+                    onClick={() => {handleCreateConversation(selectedUser.id)}} type="button">
+                       
+                    </ChatBubbleOutlineIcon>
+                    {/* <EmailIcon onClick={handleClick}>Contact User</EmailIcon> */}
                 <Card>{imageCard}</Card>
                 </Stack>
                 <Stack>
                 <Box sx={{ padding: "1vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
+     
         <Typography variant="h1" sx={{fontSize: 15}} component="div">
             Skills
         </Typography>
