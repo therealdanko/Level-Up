@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  has_many :user_skills, dependent: :destroy
-  has_many :skills, through: :user_skills
-  has_many :user_level_up_skills, dependent: :destroy
-  has_many :level_up_skills, through: :user_level_up_skills
+  has_many :teaching_skills, dependent: :destroy
+  has_many :skills, through: :teaching_skills
+  has_many :learning_skills, dependent: :destroy
+  has_many :learning_skills, through: :skills
   has_many :sender_conversations, class_name: 'Conversation', foreign_key: 'sender_id'
   has_many :received_conversations, class_name: 'Conversation', foreign_key: 'receiver_id'
   has_many :messages, dependent: :destroy

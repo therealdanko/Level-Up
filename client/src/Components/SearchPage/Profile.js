@@ -32,7 +32,7 @@ function Profile({objUser, selectedSkill, selectedUser, handleSelectedUser, hand
     // }
 
     const handleOpen = () => {
-        fetch(`/user_skills/${id}`).then((res) => {
+        fetch(`/teaching_skills/${id}`).then((res) => {
             if(res.ok){
                 res.json().then ((user)=> {
                     handleSelectedUser(user)
@@ -84,7 +84,7 @@ function Profile({objUser, selectedSkill, selectedUser, handleSelectedUser, hand
   
 
 
-   console.log(selectedUser)
+//    console.log(selectedUser)
 
 
     const style = {
@@ -107,8 +107,8 @@ function Profile({objUser, selectedSkill, selectedUser, handleSelectedUser, hand
     }
 
   return (
-    <Stack justifyContent="space-between" direction="column">
-         <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
+    <Stack sx={{overflow: "scoll"}} justifyContent="space-between" direction="column">
+         <Box sx={{ overflow: "scoll", padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
          <Button onClick={handleOpen} variant="contained" size="small">Profile</Button>
          <Modal
                 justifyContent="space-between"
@@ -139,8 +139,8 @@ function Profile({objUser, selectedSkill, selectedUser, handleSelectedUser, hand
         </Box> 
         </Stack>
                 <Stack>                
-                {selectedUser ? selectedUser.user_skills.map((user_skill) => 
-                        <UserSkill user_skill={user_skill}/>
+                {selectedUser ? selectedUser.teaching_skills.map((teaching_skill) => 
+                        <UserSkill teaching_skill={teaching_skill}/>
                         ) : null}
                       </Stack> 
                       <Box sx={{ padding: "1vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
@@ -148,7 +148,7 @@ function Profile({objUser, selectedSkill, selectedUser, handleSelectedUser, hand
            Skills I am looking to Level Up
         </Typography>
         <Stack>
-                <Card>{selectedUser ? selectedUser.level_up_skills.map((level_up_skill) => <LevelUpSkill level_up_skill={level_up_skill}/>): null}</Card>
+                <Card>{selectedUser ? selectedUser.learning_skills.map((learning_skill) => <LevelUpSkill learning_skill={learning_skill}/>): null}</Card>
                 </Stack>
         </Box> 
          <Button onClick={handleClose}>Back</Button>

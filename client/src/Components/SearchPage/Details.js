@@ -14,14 +14,14 @@ import Modal from '@mui/material/Modal';
 
 
 
-function Details({user_skill}) {
+function Details({teaching_skill}) {
 
     const [open, setOpen] = useState(false);
     const [skillDescription, setSkillDescription] = useState(null)
     const [skillCredentials, setskillCredentials] = useState(null)
     const handleOpen = () => {
-      setSkillDescription(user_skill.description)
-      setskillCredentials(user_skill.credentials)
+      setSkillDescription(teaching_skill.description)
+      setskillCredentials(teaching_skill.credentials)
       setOpen(true);
     };
     const handleClose = () => {
@@ -52,7 +52,7 @@ function Details({user_skill}) {
 <CardContent style={{ justifyContent: 'center' }}> 
 <Box sx={{ padding: ".5vh", minWidth: 275, width: 100, justifyContent: "center", alignItems: "center" }}>
 <Typography align="center" variant="h1" sx={{fontSize: 24}} component="div">
-               {user_skill.skill_name}
+               {teaching_skill.skill_name}
         </Typography> 
 <Typography align="center" variant="h4" sx={{fontSize: 20}} component="div">
                Description

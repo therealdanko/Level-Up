@@ -32,17 +32,17 @@ function ConversationCard({id,
       </Typography>
     )
 
+
   return (
     <div>
     <Link onClick={() => {
-      handleSelectedUser(receiver)
       handleSelectedConvo(conversation)
     }} 
       to={`/messagesPage/${id}`} >
     <div className="chat">
         <div  className='chat_details'>
         <Typography  variant="h1" sx={{fontSize: 15}} component="div">
-         {receiver.name} 
+         {user.id === sender.id ? receiver.name : sender.name} 
           </Typography>
           
         </div>

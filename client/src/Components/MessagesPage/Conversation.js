@@ -90,13 +90,15 @@ const handleSubmit = (e) => {
  
 }
 
-
+console.log(conversation.receiver.name)
 
     return(
+        <Box component="div" sx={{ overflow: 'auto' }}>
         <Stack  justifyContent="space-between" direction="column">
-                  <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
+                  <Box sx={{  overflow: "hidden",
+          overflowY: "scroll", display:"flex", flexDirection: "column",  padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
                     <Typography  variant="h1" sx={{fontSize: 17}} component="div">
-        Messages with {selectedUser.name}
+        Messages with {user.id === conversation.sender_id ? conversation.receiver.name : conversation.sender.name}
 
         
                     </Typography>
@@ -107,8 +109,11 @@ const handleSubmit = (e) => {
                      
         {messages.map((message) => 
         <Message 
+        user={user}
+        selectedUser={selectedUser}
         messageBody={message.body} 
-        conversationSender={conversation.sender_id} conversationReceiver={conversation.receiver_id} 
+        conversationSender={conversation.sender_id} 
+        conversationReceiver={conversation.receiver_id} 
         messageUser={message.user_id}
         />)}
                     </Typography>
@@ -129,6 +134,7 @@ const handleSubmit = (e) => {
         </Box>
         </Stack>
         </Stack>
+        </Box>
     )
 }
 

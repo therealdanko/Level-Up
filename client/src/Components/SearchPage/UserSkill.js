@@ -18,7 +18,7 @@ import Details from './Details'
   
 
 
-function UserSkill({user_skill}) {
+function UserSkill({teaching_skill}) {
 
    
 
@@ -27,8 +27,8 @@ function UserSkill({user_skill}) {
           <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
        
           <Typography justifyContent="center" variant="h7" sx={{fontSize: 15}} component="div">
-         {user_skill.skill_name} 
-         <Details user_skill={user_skill}/>
+         {teaching_skill.skill_name} 
+         <Details teaching_skill={teaching_skill}/>
           </Typography> 
          
                   </Box> 

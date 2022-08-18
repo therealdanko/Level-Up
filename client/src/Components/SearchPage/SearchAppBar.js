@@ -21,7 +21,7 @@ function SearchAppBar({user, skills, handleSelectedSkill, handleClick, selectedS
         
       };
       
-  
+      
     
 
     return(

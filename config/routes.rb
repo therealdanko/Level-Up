@@ -9,22 +9,24 @@ resources :conversations do
 end
 
   
-resources :user_level_up_skills
-resources :level_up_skills
-resources :user_skills
+resources :learning_skills
+resources :teaching_skills
 resources :skills
 resources :users
 
  post "/image", to: "image#create"
  get "/me", to: "users#show"
+ get "/skills", to: "skills#index"
  post "/signup", to: "users#create"
  post "/login", to: "sessions#create"
  delete "/logout", to: "sessions#destroy"
  patch "/me", to: "users#update"
  delete "/me", to: "users#destroy"
- get "/user_skills/:id", to: "user_skills#show"
+ get "/teaching_skills/:id", to: "teaching_skills#show"
  get "/users/:id", to: "users#convo_user"
- post "user_skills", to: "user_skills#create"
+ post "/teaching_skills", to: "teaching_skills#create"
+ delete "/teaching_skills/:id", to: "teaching_skills#destroy"
+ patch "/teaching_skills/:id", to: "teaching_skills#update"
 
  get "/conversations", to: "conversations#index"
  post "/conversations", to: "conversations#create"

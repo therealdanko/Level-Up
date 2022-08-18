@@ -24,7 +24,8 @@ function AddNewSkill({
     skills,
 handleSelectedSkill,
 selectedSkill,
- handleClose
+ handleClose,
+ handleAddNewSkill
 }) {
 
 
@@ -34,7 +35,7 @@ selectedSkill,
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch("/user_skills", {
+        fetch("/teaching_skills", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -46,14 +47,15 @@ selectedSkill,
           }),
         })
           .then((r) => r.json())
-          .then((newUserSkill) => 
-          handleNewUserSkill(newUserSkill)
+          .then((newUserSkill) => {
+            handleAddNewSkill(newUserSkill)
+          console.log(newUserSkill)
+          }
+          
           )
     } 
 
-    const handleNewUserSkill = () => {
-
-    }
+    
 
     console.log(description)
     console.log(credentials)

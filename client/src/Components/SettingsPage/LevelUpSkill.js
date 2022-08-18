@@ -20,7 +20,7 @@ console.log(skill)
             <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
             <CardContent style={{ justifyContent: 'center' }}> 
         <Typography variant="h7" sx={{fontSize: 25}} component="div">
-                {skill.name}
+                {skill.skill_name}
         </Typography>  
          </CardContent>             
             <CardActions style={{ justifyContent: 'center' }}>

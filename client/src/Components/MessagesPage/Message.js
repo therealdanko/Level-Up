@@ -17,14 +17,20 @@ function Message({
     messageBody, 
     conversationSender, 
     conversationReceiver,
-    messageUser
+    messageUser, 
+    user,
+    selectedUser
 }) {
 
     const [isUser, setIsUser] = useState(null)
 
+    console.log(conversationSender)
+    console.log(conversationReceiver)
+    console.log(messageUser)
+
     useEffect(() => {
         function cleanup(){
-           if (conversationSender === messageUser) {setIsUser(true)}else
+           if (user.id === messageUser) {setIsUser(true)}else
            {setIsUser(false)}
         }
         cleanup()
