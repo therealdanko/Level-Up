@@ -17,9 +17,9 @@ function SkillsToLevelUpPage({user}) {
 
 const navigate = useNavigate()
 
-let levelUpSkills = user.level_up_skills
+let learningSkills = user.learning_skills
 
-console.log(levelUpSkills)
+console.log(learningSkills)
 
 
 
@@ -30,7 +30,7 @@ const handleBackButton = (e) => {
     return(
         <> 
    <Stack justifyContent="space-between" direction="column">
-        {levelUpSkills.map((skill) => <LevelUpSkill skill={skill}/>)}
+        {learningSkills.map((skill) => <LevelUpSkill skill={skill}/>)}
     <Stack>
         <Button onClick={handleBackButton}>Back</Button>
         </Stack>

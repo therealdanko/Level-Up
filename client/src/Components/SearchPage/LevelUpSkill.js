@@ -11,15 +11,15 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Modal from '@mui/material/Modal';
 
-function LevelUpSkill({level_up_skill}) {
+function LevelUpSkill({learning_skill}) {
 
-    console.log(level_up_skill)
+    console.log(learning_skill)
 
     const levelUpSkill =(
    <Stack>
      <Box sx={{ padding: ".5vh", minWidth: 275, justifyContent: "center", alignItems: "center" }}>
      <Typography justifyContent="center" variant="h7" sx={{fontSize: 15}} component="div">
-    {level_up_skill.name}
+    {learning_skill.skill_name}
      </Typography> 
      </Box>
 

@@ -26,7 +26,15 @@ import AddNewSkill from '../../Components/SettingsPage/AddNewSkill';
 
 
 
-function UserSkillPage({user, skills, userSkills, handleSelectedSkill, selectedSkill}) {
+function UserSkillPage({user,
+     skills, 
+     userSkills, 
+     handleSelectedSkill, 
+     handleUserSkills,
+     selectedSkill,
+     handleAddNewSkill,
+     handeUpdateSkill
+    }) {
 
     const navigate = useNavigate()
 
@@ -62,6 +70,7 @@ function UserSkillPage({user, skills, userSkills, handleSelectedSkill, selectedS
 
     const addSkill = (
    <AddNewSkill
+   handleAddNewSkill={handleAddNewSkill}
    handleClose={handleClose}
    selectedSkill={selectedSkill} 
    handleSelectedSkill={handleSelectedSkill} 
@@ -70,9 +79,9 @@ function UserSkillPage({user, skills, userSkills, handleSelectedSkill, selectedS
        
   
     
-    let mySkills = user.skills
-    let userSkillInfo = user.user_skills
+  
    
+
     return (
         <>
         
@@ -81,7 +90,7 @@ function UserSkillPage({user, skills, userSkills, handleSelectedSkill, selectedS
          */}
         </Stack> 
         <Stack>
-           <MySkillInfo mySkills={mySkills} userSkillInfo={userSkillInfo} />
+           <MySkillInfo handeUpdateSkill={handeUpdateSkill} selectedSkill={selectedSkill} handleSelectedSkill={handleSelectedSkill} handleUserSkills={handleUserSkills} userSkills={userSkills} />
            
             </Stack> 
             <Button onClick={handleOpen} variant="contained">Add Skill</Button>

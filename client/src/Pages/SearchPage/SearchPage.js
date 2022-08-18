@@ -29,7 +29,7 @@ function SearchPage({
 
    
     
-   const selectedUsers = selectedSkill.users
+   const selectedUsers = selectedSkill.teachers
    console.log(selectedUsers)
 
     return(

@@ -32,12 +32,36 @@ function App() {
   const [conversation, setConversation] = useState(null)
   const [userSkills, setUserSkills] = useState([])
 
-  console.log(userSkills)
+
 
   const navigate = useNavigate()
 
+  const handleUserSkills = (selected) => {
+   const updatedUserSkills = userSkills.filter((skill) => skill.id !== selected )
+   setUserSkills(updatedUserSkills)
+
+  }
+
+  const handleAddNewSkill = (newSkill) => {
+    const updatedUserSkills = [...userSkills, newSkill]
+    console.log(newSkill)
+    setUserSkills(updatedUserSkills)
+  }
+
+  const handeUpdateSkill = (updatedSkill) =>{
+    const updatedUserSkills = userSkills.map((skill) => {
+      if(skill.id === updatedSkill.id) {
+        return updatedSkill;
+      }else {
+        return skill
+      }
+    })
+    setUserSkills(updatedUserSkills)
+  }
+
   const handleSelectedSkill = (selected) => {
     setSelectedSkill(() => (selected))
+    
   }
  
   const handleSelectedUser = (selected) =>{
@@ -82,7 +106,7 @@ const handleCreateConversation = (id) => {
   }).then((r) => r.json()
   .then((conversation) => {
      setConversations([...conversations, conversation])
-     navigate(`/messagesPage/${conversation.id}`)
+     navigate(`/messagesPage/`)
   }));
 }
 
@@ -92,6 +116,7 @@ const handleCreateConversation = (id) => {
       if (resp.ok) {
         resp.json().then((user) => {
           setUser(user)
+          setUserSkills(user.teaching_skills)
         })
       }
     })
@@ -117,7 +142,7 @@ const handleCreateConversation = (id) => {
       if (resp.ok) {
         resp.json().then((skillsList) => {
           setSkills(skillsList)
-          setUserSkills(user.skills)
+          console.log(skillsList)
 })            
         
       }
@@ -194,6 +219,9 @@ const handleCreateConversation = (id) => {
         userSkills={userSkills}
         skills={skills}
         user={user}
+        handeUpdateSkill={handeUpdateSkill}
+        handleAddNewSkill={handleAddNewSkill}
+        handleUserSkills={handleUserSkills}
         selectedSkill={selectedSkill}
         setSelectedSkill={setSelectedSkill}
         handleSelectedSkill={handleSelectedSkill}      

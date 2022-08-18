@@ -30,6 +30,8 @@ function AddSkillAppBar({skills, selectedSkill, handleSelectedSkill}) {
           
         };
 
+        console.log(selectedSkill)
+
   return (
     <AppBar position="static">
         <Stack justifyContent="space-between" direction="row">

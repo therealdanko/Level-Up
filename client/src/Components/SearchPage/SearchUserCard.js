@@ -14,8 +14,8 @@ import Profile from './Profile';
 
 
 function SearchUserCard({objUser, selectedSkill, selectedUser, handleSelectedUser, handleCreateConversation}) {
-    console.log(objUser)
-    console.log(selectedSkill)
+    // console.log(objUser)
+    // console.log(selectedSkill)
 
     const userCard = (
       <Stack>

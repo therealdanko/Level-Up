@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_10_214341) do
+ActiveRecord::Schema.define(version: 2022_08_17_012632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +25,13 @@ ActiveRecord::Schema.define(version: 2022_08_10_214341) do
     t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
 
-  create_table "level_up_skills", force: :cascade do |t|
-    t.string "name"
+  create_table "learning_skills", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "skill_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["skill_id"], name: "index_learning_skills_on_skill_id"
+    t.index ["user_id"], name: "index_learning_skills_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -47,25 +50,15 @@ ActiveRecord::Schema.define(version: 2022_08_10_214341) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_level_up_skills", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "level_up_skill_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["level_up_skill_id"], name: "index_user_level_up_skills_on_level_up_skill_id"
-    t.index ["user_id"], name: "index_user_level_up_skills_on_user_id"
-  end
-
-  create_table "user_skills", force: :cascade do |t|
+  create_table "teaching_skills", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
     t.string "description"
-    t.string "experience"
     t.string "credentials"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
-    t.index ["user_id"], name: "index_user_skills_on_user_id"
+    t.index ["skill_id"], name: "index_teaching_skills_on_skill_id"
+    t.index ["user_id"], name: "index_teaching_skills_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,10 +72,10 @@ ActiveRecord::Schema.define(version: 2022_08_10_214341) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "learning_skills", "skills"
+  add_foreign_key "learning_skills", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
-  add_foreign_key "user_level_up_skills", "level_up_skills"
-  add_foreign_key "user_level_up_skills", "users"
-  add_foreign_key "user_skills", "skills"
-  add_foreign_key "user_skills", "users"
+  add_foreign_key "teaching_skills", "skills"
+  add_foreign_key "teaching_skills", "users"
 end

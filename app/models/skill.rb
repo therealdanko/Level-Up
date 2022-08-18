@@ -1,12 +1,15 @@
 class Skill < ApplicationRecord
-  has_many :user_skills, dependent: :destroy
-  has_many :users, through: :user_skills
-
+  has_many :teaching_skills, dependent: :destroy
+  has_many :teachers, through: :teaching_skills, source: :user
+  has_many :learning_skills, dependent: :destroy
+  has_many :learners, through: :learning_skills, source: :user
+ 
   # validates presence: true, uniqueness: true
 
-  def skill_users
+def teaching_skill_users
+  
+  users = self.teachers
 
-    skill_users = self.users
-  end
+end
 
 end
